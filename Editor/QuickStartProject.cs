@@ -8,7 +8,7 @@ public class QuickStartProject : UnityEditor.EditorWindow
 {
     private string versionNumber = "1.1";
     private List<Pack> packs;
-    static AddRequest Request;
+    static AddAndRemoveRequest Request;
 
     public QuickStartProject(){
         packs = new List<Pack>(){
@@ -17,7 +17,14 @@ public class QuickStartProject : UnityEditor.EditorWindow
                 new PackageModule("com.unity.addressables", "Addressables"),
                 new PackageModule("com.unity.ai.navigation", "AI Navigation"),
                 new PackageModule("https://github.com/febucci/unitypackage-custom-hierarchy.git", "Febucci Custom Hierarchy"),
-                new PackageModule("com.unity.ide.visualstudio", "Visual Studio Editor")
+                new PackageModule("com.unity.ide.visualstudio", "Visual Studio Editor"),
+                new PackageModule("com.unity.feature.gameplay-storytelling", "Gameplay and Storytelling"),
+                new PackageModule("com.unity.feature.mobile", "Mobile"),
+                new PackageModule("com.unity.inputsystem", "New Input System"),
+                new PackageModule("com.unity.postprocessing", "Post Processing"),
+                new PackageModule("com.unity.purchasing", "In App Purchasing"),
+                new PackageModule("com.unity.services.economy", "Unity Economy"),
+
             }),
 
             new Pack("2D Basics", new List<PackageModule>(){
@@ -30,11 +37,8 @@ public class QuickStartProject : UnityEditor.EditorWindow
                 new PackageModule("com.unity.2d.tilemap.extras", "2D Tilemap Extras"),
             }),
 
-            new Pack("C", new List<PackageModule>(){
-                new PackageModule("c", "c"),
-                new PackageModule("c", "c"),
-                new PackageModule("c", "c"),
-                new PackageModule("c", "c")
+            new Pack("Custom", new List<PackageModule>(){
+                new PackageModule("https://github.com/JohnyLoots/2DUtility.git", "Custom 2D Utility")
             }),
         };
     }
@@ -84,13 +88,17 @@ public class QuickStartProject : UnityEditor.EditorWindow
 
 
     void importAll(){
+        List<string> packages = new List<string>();
         for (int i = 0; i < packs.Count; i++){
             var module = packs[i];
             for (int x = 0; x < module.packageModules.Count; x++)
             {
-                Request = Client.Add(module.packageModules[x].packageURL);
+                packages.Add(module.packageModules[x].packageURL);
+                
             }
         }
+
+        Request = Client.AddAndRemove(packages.ToArray());
     }
 }
 
