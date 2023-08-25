@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEditor.PackageManager.Requests;
 using UnityEditor.PackageManager;
 
-public class QuickProjectSetup : UnityEditor.EditorWindow
+public class QuickStartProject : UnityEditor.EditorWindow
 {
     private string versionNumber = "1.1";
     private List<Pack> packs;
     static AddRequest Request;
 
-    public QuickProjectSetup(){
+    public QuickStartProject(){
         packs = new List<Pack>(){
 
             new Pack("Generic", new List<PackageModule>(){
@@ -40,11 +40,11 @@ public class QuickProjectSetup : UnityEditor.EditorWindow
     }
 
 
-    [MenuItem("Tools/Onebit Studio Project Setup")]
+    [MenuItem("Tools/Quick start project")]
     static void Initilize()
     {
         //Window
-        QuickProjectSetup window = (QuickProjectSetup)EditorWindow.GetWindow(typeof(QuickProjectSetup), true, "My Empty Window");
+        QuickStartProject window = (QuickStartProject)EditorWindow.GetWindow(typeof(QuickStartProject), true, "My Empty Window");
         var popup_Width = 180;
         var popup_Height = 480;
         window.position = new Rect(Screen.width, Screen.height - (popup_Height / 2), popup_Width, popup_Height);
