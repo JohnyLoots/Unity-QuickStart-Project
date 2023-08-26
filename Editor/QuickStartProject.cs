@@ -93,7 +93,9 @@ public class QuickStartProject : UnityEditor.EditorWindow
             var module = packs[i];
             for (int x = 0; x < module.packageModules.Count; x++)
             {
-                packages.Add(module.packageModules[x].packageURL);
+                if (module.packageModules[x].importState){
+                    packages.Add(module.packageModules[x].packageURL);
+                }
                 
             }
         }
